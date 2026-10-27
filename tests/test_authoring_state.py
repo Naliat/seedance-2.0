@@ -433,10 +433,16 @@ class AuthoringStateAdversarialTests(unittest.TestCase):
 
     def test_default_check_accepts_legacy_sequence_without_lane_or_state(self) -> None:
         project = load_json("examples/sequence-airport-arrival/project-state.json")
-        for clip in project["clips"]:
-            clip.pop("authoring_state", None)
-            clip.pop("directors_read_lane", None)
-            clip.pop("contract_authoring_state_snapshots", None)
+        list(
+            map(
+                lambda clip: (
+                    clip.pop("authoring_state", None),
+                    clip.pop("directors_read_lane", None),
+                    clip.pop("contract_authoring_state_snapshots", None),
+                ),
+                project["clips"],
+            )
+        )
         self.assertEqual(self.validate_project_copy(project, strict=False), [])
 
     def test_default_contract_with_prompt_accepts_legacy_absence(self) -> None:
