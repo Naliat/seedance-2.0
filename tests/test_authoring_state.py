@@ -1166,49 +1166,24 @@ class AuthoringStateAdversarialTests(unittest.TestCase):
                 )
 
     def test_default_ignorable_only_authoring_text_and_carriers_are_empty(self) -> None:
-        base = load_json(
-            "examples/sequence-airport-arrival/clip-01-contract.json"
-        )["authoring_state"]
+        base = load_json("examples/sequence-airport-arrival/clip-01-contract.json")["authoring_state"]
         for invisible in ("\u200b", "\u2060\ufe0f", "\u3164", "\u0301", "\u2800", "...---"):
-            state = copy.deepcopy(base)
-            state["dramatic_function"] = invisible
-            errors: list[str] = []
-            project_state_check.check_authoring_state(
-                state,
-                "invisible authoring text",
-                errors,
-                required=True,
-                lane="narrative",
-            )
             with self.subTest(invisible=repr(invisible), field="dramatic_function"):
+                state, errors = copy.deepcopy(base), []
+                state["dramatic_function"] = invisible
+                project_state_check.check_authoring_state(state, "invisible authoring text", errors, required=True, lane="narrative")
                 self.assertTrue(any("dramatic_function" in error for error in errors), errors)
-
-            state = copy.deepcopy(base)
-            state["prompt_carriers"] = [invisible]
-            errors = []
-            project_state_check.check_authoring_state(
-                state,
-                "invisible carrier",
-                errors,
-                required=True,
-                lane="narrative",
-            )
             with self.subTest(invisible=repr(invisible), field="prompt_carriers"):
+                state, errors = copy.deepcopy(base), []
+                state["prompt_carriers"] = [invisible]
+                project_state_check.check_authoring_state(state, "invisible carrier", errors, required=True, lane="narrative")
                 self.assertTrue(any("prompt_carriers[0]" in error for error in errors), errors)
 
         for separator in "\n\r\v\f\x1c\x1d\x1e\x85\u2028\u2029":
-            state = copy.deepcopy(base)
-            state["dramatic_function"] = f"left{separator}right"
-            state["prompt_carriers"] = [f"visible{separator}carrier"]
-            errors = []
-            project_state_check.check_authoring_state(
-                state,
-                "Unicode line boundary",
-                errors,
-                required=True,
-                lane="narrative",
-            )
             with self.subTest(separator=ord(separator)):
+                state, errors = copy.deepcopy(base), []
+                state.update({"dramatic_function": f"left{separator}right", "prompt_carriers": [f"visible{separator}carrier"]})
+                project_state_check.check_authoring_state(state, "Unicode line boundary", errors, required=True, lane="narrative")
                 self.assertTrue(any("dramatic_function" in error for error in errors), errors)
                 self.assertTrue(any("prompt_carriers[0]" in error for error in errors), errors)
 
