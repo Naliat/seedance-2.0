@@ -113,35 +113,33 @@ class AuthoringStateFixtureTests(unittest.TestCase):
     def test_schema_and_strict_field_contracts_stay_in_static_parity(self) -> None:
         project_schema = load_json("schemas/project-state.schema.json")
         contract_schema = load_json("schemas/clip-contract.schema.json")
-        for definition in (
+        definitions = (
             "authoring_state_provenance",
             "authoring_state",
             "narrative_authoring_state",
             "non_narrative_authoring_state",
-        ):
-            self.assertEqual(
-                project_schema["$defs"][definition],
-                contract_schema["$defs"][definition],
-            )
+        )
+        for definition in definitions:
+            with self.subTest(definition=definition):
+                self.assertEqual(
+                    project_schema["$defs"][definition],
+                    contract_schema["$defs"][definition],
+                )
         narrative = project_schema["$defs"]["narrative_authoring_state"]
         non_narrative = project_schema["$defs"]["non_narrative_authoring_state"]
         self.assertEqual(set(narrative["required"]), NARRATIVE_FIELDS)
         self.assertEqual(set(narrative["properties"]), NARRATIVE_FIELDS)
         self.assertEqual(set(non_narrative["required"]), NON_NARRATIVE_FIELDS)
         self.assertEqual(set(non_narrative["properties"]), NON_NARRATIVE_FIELDS)
-        authoring_conditionals = [
-            conditional
-            for conditional in contract_schema["allOf"]
-            if "authoring_state" in json.dumps(conditional["if"], sort_keys=True)
-            or "directors_read_lane" in json.dumps(conditional["if"], sort_keys=True)
-        ]
+        authoring_conditionals = list(
+            filter(
+                lambda c: any(k in json.dumps(c.get("if", {}), sort_keys=True) for k in ("authoring_state", "directors_read_lane")),
+                contract_schema["allOf"],
+            )
+        )
         self.assertEqual(len(authoring_conditionals), 3)
         self.assertTrue(
-            all(
-                "authoring_state_provenance"
-                in conditional["then"].get("required", [])
-                for conditional in authoring_conditionals
-            )
+            all("authoring_state_provenance" in conditional["then"].get("required", []) for conditional in authoring_conditionals)
         )
 
     def test_shipped_mixed_lane_fixture_is_narrative_utility_narrative(self) -> None:
