@@ -1278,87 +1278,37 @@ class AuthoringStateAdversarialTests(unittest.TestCase):
         self.assertTrue(any("missing authoring_state" in e for e in errors), errors)
 
     def test_protected_ledger_rejects_coordinated_rewrites_and_status_downgrade(self) -> None:
-        ledger = protected_historical_ledger()
-        project = load_json("examples/sequence-airport-arrival/project-state.json")
+        ledger, project = protected_historical_ledger(), load_json("examples/sequence-airport-arrival/project-state.json")
         historical_clip = next(item for item in project["clips"] if item["clip_id"] == "clip_01")
         historical = load_json("examples/sequence-airport-arrival/clip-01-contract.json")
-        historical_prompt = (
-            ROOT / "examples/sequence-airport-arrival/clip-01-prompt.md"
-        ).read_text(encoding="utf-8")
+        historical_prompt = (ROOT / "examples/sequence-airport-arrival/clip-01-prompt.md").read_text(encoding="utf-8")
         historical["authoring_state"]["dramatic_function"] = "coordinated rewrite"
-        historical["authoring_state_provenance"]["authoring_state_sha256"] = (
-            project_state_check.authoring_state_digest(historical["authoring_state"])
-        )
-        historical_clip["contract_authoring_state_snapshots"] = [
-            copy.deepcopy(historical["authoring_state_provenance"])
-        ]
+        historical["authoring_state_provenance"]["authoring_state_sha256"] = project_state_check.authoring_state_digest(historical["authoring_state"])
+        historical_clip["contract_authoring_state_snapshots"] = [copy.deepcopy(historical["authoring_state_provenance"])]
         errors: list[str] = []
-        project_state_check.validate_contract(
-            historical,
-            "coordinated historical rewrite",
-            errors,
-            strict=True,
-            current_clip=historical_clip,
-            prompt=historical_prompt,
-            current_project_version=project_state_check.project_version(project),
-            historical_ledger=ledger,
-        )
+        project_state_check.validate_contract(historical, "coordinated historical rewrite", errors, strict=True, current_clip=historical_clip, prompt=historical_prompt, current_project_version=project_state_check.project_version(project), historical_ledger=ledger)
         self.assertTrue(any("contract_sha256" in error for error in errors), errors)
 
         downgraded_project = load_json("examples/sequence-airport-arrival/project-state.json")
-        downgraded_clip = next(
-            item for item in downgraded_project["clips"] if item["clip_id"] == "clip_02"
-        )
-        downgraded = load_json(
-            "examples/sequence-airport-arrival/clip-02-continuation-contract.json"
-        )
-        downgraded_prompt = (
-            ROOT / "examples/sequence-airport-arrival/clip-02-prompt.md"
-        ).read_text(encoding="utf-8")
-        downgraded_clip["status"] = "rejected"
-        downgraded_project["take_history"].append(
-            {
-                "take_id": "take_clip02_rejected",
-                "clip_id": "clip_02",
-                "verdict": "reject",
-                "evidence": "Synthetic terminal state for the provenance rollback test.",
-            }
-        )
-        downgraded["status"] = "rejected"
+        downgraded_clip = next(item for item in downgraded_project["clips"] if item["clip_id"] == "clip_02")
+        downgraded = load_json("examples/sequence-airport-arrival/clip-02-continuation-contract.json")
+        downgraded_prompt = (ROOT / "examples/sequence-airport-arrival/clip-02-prompt.md").read_text(encoding="utf-8")
+        downgraded_clip["status"] = downgraded["status"] = "rejected"
+        downgraded_project["take_history"].append({"take_id": "take_clip02_rejected", "clip_id": "clip_02", "verdict": "reject", "evidence": "Synthetic terminal state for the provenance rollback test."})
         downgraded["authoring_state"]["hidden_want_objective"] = "status downgrade rewrite"
-        downgraded["authoring_state_provenance"]["authoring_state_sha256"] = (
-            project_state_check.authoring_state_digest(downgraded["authoring_state"])
-        )
-        downgraded_clip["contract_authoring_state_snapshots"] = [
-            copy.deepcopy(downgraded["authoring_state_provenance"])
-        ]
-        downgraded_project["clips"] = [
-            clip for clip in downgraded_project["clips"] if clip["clip_id"] != "clip_03"
-        ]
+        downgraded["authoring_state_provenance"]["authoring_state_sha256"] = project_state_check.authoring_state_digest(downgraded["authoring_state"])
+        downgraded_clip["contract_authoring_state_snapshots"] = [copy.deepcopy(downgraded["authoring_state_provenance"])]
+        downgraded_project["clips"] = [clip for clip in downgraded_project["clips"] if clip["clip_id"] != "clip_03"]
         downgraded_project["scenes"][0]["assigned_clip_ids"] = ["clip_01", "clip_02"]
-        downgraded_project["beats"] = [
-            beat
-            for beat in downgraded_project["beats"]
-            if beat.get("assigned_clip_id") != "clip_03"
-        ]
+        downgraded_project["beats"] = [beat for beat in downgraded_project["beats"] if beat.get("assigned_clip_id") != "clip_03"]
         downgraded_project["current_clip_id"] = "clip_02"
         self.assertEqual(self.validate_project_copy(downgraded_project, strict=True), [])
         errors = []
-        project_state_check.validate_contract(
-            downgraded,
-            "coordinated status downgrade",
-            errors,
-            strict=True,
-            current_clip=downgraded_clip,
-            prompt=downgraded_prompt,
-            current_project_version=project_state_check.project_version(downgraded_project),
-            historical_ledger=ledger,
-        )
+        project_state_check.validate_contract(downgraded, "coordinated status downgrade", errors, strict=True, current_clip=downgraded_clip, prompt=downgraded_prompt, current_project_version=project_state_check.project_version(downgraded_project), historical_ledger=ledger)
         self.assertTrue(any("no protected historical provenance ledger entry" in e for e in errors), errors)
 
-        ledger_data = load_json("validation/authoring-state-provenance-ledger.json")
+        ledger_data, ledger_errors = load_json("validation/authoring-state-provenance-ledger.json"), []
         ledger_data["entries"][0]["contract_status"] = "accepted"
-        ledger_errors: list[str] = []
         with mock.patch.object(project_state_check, "load_json", return_value=ledger_data):
             loaded = project_state_check.load_protected_provenance_ledger(ROOT, ledger_errors)
         self.assertIsNone(loaded)
