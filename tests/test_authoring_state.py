@@ -1453,56 +1453,24 @@ class AuthoringStateAdversarialTests(unittest.TestCase):
     def test_contract_freshness_classifies_every_status_explicitly(self) -> None:
         project = load_json("examples/sequence-airport-arrival/project-state.json")
         base_clip = next(item for item in project["clips"] if item["clip_id"] == "clip_02")
-        base_contract = load_json(
-            "examples/sequence-airport-arrival/clip-02-continuation-contract.json"
-        )
-        prompt = (ROOT / "examples/sequence-airport-arrival/clip-02-prompt.md").read_text(
-            encoding="utf-8"
-        )
+        base_contract = load_json("examples/sequence-airport-arrival/clip-02-continuation-contract.json")
+        prompt = (ROOT / "examples/sequence-airport-arrival/clip-02-prompt.md").read_text(encoding="utf-8")
 
         for status in sorted(project_state_check.CURRENT_CONTRACT_STATUSES):
-            clip = copy.deepcopy(base_clip)
-            contract = copy.deepcopy(base_contract)
-            clip["status"] = status
-            contract["status"] = status
-            contract["authoring_state"]["hidden_want_objective"] = "a stale objective"
-            errors: list[str] = []
-            project_state_check.validate_contract(
-                contract,
-                f"current {status}",
-                errors,
-                strict=True,
-                current_clip=clip,
-                prompt=prompt,
-                historical_ledger=protected_historical_ledger(),
-            )
             with self.subTest(status=status):
-                self.assertTrue(
-                    any("current authoring_state is stale" in error for error in errors),
-                    errors,
-                )
+                clip, contract, errors = copy.deepcopy(base_clip), copy.deepcopy(base_contract), []
+                clip["status"] = contract["status"] = status
+                contract["authoring_state"]["hidden_want_objective"] = "a stale objective"
+                project_state_check.validate_contract(contract, f"current {status}", errors, strict=True, current_clip=clip, prompt=prompt, historical_ledger=protected_historical_ledger())
+                self.assertTrue(any("current authoring_state is stale" in error for error in errors), errors)
 
         for status in sorted(project_state_check.HISTORICAL_CONTRACT_STATUSES):
-            clip = copy.deepcopy(base_clip)
-            contract = copy.deepcopy(base_contract)
-            clip["status"] = status
-            contract["status"] = status
-            contract["authoring_state"]["hidden_want_objective"] = "preserved planned objective"
-            errors = []
-            project_state_check.validate_contract(
-                contract,
-                f"historical {status}",
-                errors,
-                strict=True,
-                current_clip=clip,
-                prompt=prompt,
-                historical_ledger=protected_historical_ledger(),
-            )
             with self.subTest(status=status):
-                self.assertFalse(
-                    any("current authoring_state is stale" in error for error in errors),
-                    errors,
-                )
+                clip, contract, errors = copy.deepcopy(base_clip), copy.deepcopy(base_contract), []
+                clip["status"] = contract["status"] = status
+                contract["authoring_state"]["hidden_want_objective"] = "preserved planned objective"
+                project_state_check.validate_contract(contract, f"historical {status}", errors, strict=True, current_clip=clip, prompt=prompt, historical_ledger=protected_historical_ledger())
+                self.assertFalse(any("current authoring_state is stale" in error for error in errors), errors)
 
     def test_production_main_invokes_prompt_boundary(self) -> None:
         sentinel = "sentinel prompt boundary failure"
