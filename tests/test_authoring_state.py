@@ -284,10 +284,10 @@ class AuthoringStateFixtureTests(unittest.TestCase):
     def test_example_prompts_compile_exact_carriers_without_internal_labels(self) -> None:
         example = ROOT / "examples/sequence-airport-arrival"
         for contract_name in ("clip-01-contract.json", "clip-02-continuation-contract.json"):
-            contract = json.loads((example / contract_name).read_text(encoding="utf-8"))
-            prompt_name = f"{contract['clip_id'].replace('_', '-')}-prompt.md"
-            prompt = (example / prompt_name).read_text(encoding="utf-8")
-            with self.subTest(prompt=prompt_name):
+            with self.subTest(contract_name=contract_name):
+                contract = json.loads((example / contract_name).read_text(encoding="utf-8"))
+                prompt_name = f"{contract['clip_id'].replace('_', '-')}-prompt.md"
+                prompt = (example / prompt_name).read_text(encoding="utf-8")
                 self.assertEqual(
                     project_state_check.compiled_prompt_errors(
                         prompt,
