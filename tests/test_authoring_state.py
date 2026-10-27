@@ -202,10 +202,10 @@ class AuthoringStateFixtureTests(unittest.TestCase):
 
     def test_contracts_carry_complete_lane_records(self) -> None:
         for path in sorted((ROOT / "examples").rglob("*contract.json")):
-            contract = json.loads(path.read_text(encoding="utf-8"))
-            lane = contract["directors_read_lane"]
-            expected = NARRATIVE_FIELDS if lane == "narrative" else NON_NARRATIVE_FIELDS
             with self.subTest(path=path.relative_to(ROOT)):
+                contract = json.loads(path.read_text(encoding="utf-8"))
+                lane = contract["directors_read_lane"]
+                expected = NARRATIVE_FIELDS if lane == "narrative" else NON_NARRATIVE_FIELDS
                 self.assertEqual(expected, set(contract["authoring_state"]))
                 provenance = contract["authoring_state_provenance"]
                 self.assertEqual(provenance["project_id"], contract["project_id"])
