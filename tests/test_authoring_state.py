@@ -574,10 +574,18 @@ class AuthoringStateAdversarialTests(unittest.TestCase):
             "non_narrative_refusal": "No invented agency, psychology, or dramatic meaning.",
         }
         project = load_json("examples/sequence-mixed-lane/project-state.json")
-        for clip in project["clips"][:2]:
-            clip["directors_read_lane"] = "non_narrative"
-            clip["authoring_state"] = copy.deepcopy(utility_state)
-            clip["status"] = "accepted"
+        list(
+            map(
+                lambda clip: clip.update(
+                    {
+                        "directors_read_lane": "non_narrative",
+                        "authoring_state": copy.deepcopy(utility_state),
+                        "status": "accepted",
+                    }
+                ),
+                project["clips"][:2],
+            )
+        )
         project["clips"][0]["parent_clip_id"] = "clip_02"
         project["clips"][1]["parent_clip_id"] = "clip_01"
         project["clips"][2]["parent_clip_id"] = "clip_02"
