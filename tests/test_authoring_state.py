@@ -530,12 +530,20 @@ class AuthoringStateAdversarialTests(unittest.TestCase):
         project = load_json("examples/standalone-clip/project-state.json")
         project["project_mode"] = "sequence_project"
         project["story"]["medium"] = "live_action"
-        for clip in project["clips"]:
-            clip["directors_read_lane"] = "non_narrative"
-            clip["authoring_state"] = {
-                "utility_intent": "Show the latch closing cleanly in one readable motion.",
-                "non_narrative_refusal": "No invented desire, rivalry, or emotional performance.",
-            }
+        list(
+            map(
+                lambda clip: clip.update(
+                    {
+                        "directors_read_lane": "non_narrative",
+                        "authoring_state": {
+                            "utility_intent": "Show the latch closing cleanly in one readable motion.",
+                            "non_narrative_refusal": "No invented desire, rivalry, or emotional performance.",
+                        },
+                    }
+                ),
+                project["clips"],
+            )
+        )
         self.assertEqual(self.validate_project_copy(project, strict=True), [])
 
         project["clips"][0]["authoring_state"] = copy.deepcopy(
