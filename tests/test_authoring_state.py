@@ -1239,60 +1239,39 @@ class AuthoringStateAdversarialTests(unittest.TestCase):
         self.assertTrue(any("authoring metadata requires directors_read_lane" in e for e in errors), errors)
 
         clip = copy.deepcopy(project["clips"][1])
-        contract = load_json(
-            "examples/sequence-airport-arrival/clip-02-continuation-contract.json"
-        )
+        contract = load_json("examples/sequence-airport-arrival/clip-02-continuation-contract.json")
         clip.pop("directors_read_lane")
         contract.pop("directors_read_lane")
         contract.pop("authoring_state_provenance")
-        prompt = (ROOT / "examples/sequence-airport-arrival/clip-02-prompt.md").read_text(
-            encoding="utf-8"
-        )
+        prompt = (ROOT / "examples/sequence-airport-arrival/clip-02-prompt.md").read_text(encoding="utf-8")
         errors = []
         project_state_check.validate_contract(
-            contract,
-            "partial lane-less contract",
-            errors,
-            strict=False,
-            current_clip=clip,
-            prompt=prompt,
-            historical_ledger=protected_historical_ledger(),
+            contract, "partial lane-less contract", errors, strict=False,
+            current_clip=clip, prompt=prompt, historical_ledger=protected_historical_ledger(),
         )
         self.assertTrue(any("authoring metadata requires directors_read_lane" in e for e in errors), errors)
         self.assertTrue(any("missing authoring_state_provenance" in e for e in errors), errors)
 
         provenance_only_clip = copy.deepcopy(clip)
-        provenance_only_contract = load_json(
-            "examples/sequence-airport-arrival/clip-02-continuation-contract.json"
-        )
+        provenance_only_contract = load_json("examples/sequence-airport-arrival/clip-02-continuation-contract.json")
         provenance_only_clip.pop("authoring_state", None)
         provenance_only_contract.pop("directors_read_lane")
         provenance_only_contract.pop("authoring_state")
         errors = []
         project_state_check.validate_contract(
-            provenance_only_contract,
-            "provenance-only lane-less contract",
-            errors,
-            strict=False,
-            current_clip=provenance_only_clip,
-            prompt=prompt,
-            historical_ledger=protected_historical_ledger(),
+            provenance_only_contract, "provenance-only lane-less contract", errors, strict=False,
+            current_clip=provenance_only_clip, prompt=prompt, historical_ledger=protected_historical_ledger(),
         )
         self.assertTrue(any("authoring metadata requires directors_read_lane" in e for e in errors), errors)
         self.assertTrue(any("missing authoring_state" in e for e in errors), errors)
 
-        project_provenance_only = load_json(
-            "examples/sequence-airport-arrival/project-state.json"
-        )
+        project_provenance_only = load_json("examples/sequence-airport-arrival/project-state.json")
         project_clip = project_provenance_only["clips"][2]
         project_clip.pop("directors_read_lane", None)
         project_clip.pop("authoring_state", None)
         project_clip["authoring_state_provenance"] = {
-            "project_id": project_provenance_only["project_id"],
-            "clip_id": project_clip["clip_id"],
-            "canon_revision": 2,
-            "state_revision": 2,
-            "authoring_state_sha256": "0" * 64,
+            "project_id": project_provenance_only["project_id"], "clip_id": project_clip["clip_id"],
+            "canon_revision": 2, "state_revision": 2, "authoring_state_sha256": "0" * 64,
         }
         errors = self.validate_project_copy(project_provenance_only, strict=False)
         self.assertTrue(any("authoring metadata requires directors_read_lane" in e for e in errors), errors)
