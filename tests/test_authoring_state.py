@@ -1422,76 +1422,32 @@ class AuthoringStateAdversarialTests(unittest.TestCase):
 
     def test_contract_authoring_state_is_bound_to_exact_revision_and_digest(self) -> None:
         project = load_json("examples/sequence-airport-arrival/project-state.json")
-        current_version = project_state_check.project_version(project)
+        current_version, ledger = project_state_check.project_version(project), protected_historical_ledger()
 
         historical = load_json("examples/sequence-airport-arrival/clip-01-contract.json")
         historical_clip = next(item for item in project["clips"] if item["clip_id"] == "clip_01")
-        historical_prompt = (
-            ROOT / "examples/sequence-airport-arrival/clip-01-prompt.md"
-        ).read_text(encoding="utf-8")
+        historical_prompt = (ROOT / "examples/sequence-airport-arrival/clip-01-prompt.md").read_text(encoding="utf-8")
         errors: list[str] = []
-        project_state_check.validate_contract(
-            historical,
-            "historical contract",
-            errors,
-            strict=True,
-            current_clip=historical_clip,
-            prompt=historical_prompt,
-            current_project_version=current_version,
-            historical_ledger=protected_historical_ledger(),
-        )
+        project_state_check.validate_contract(historical, "historical contract", errors, strict=True, current_clip=historical_clip, prompt=historical_prompt, current_project_version=current_version, historical_ledger=ledger)
         self.assertEqual(errors, [])
 
         rewritten = copy.deepcopy(historical)
         rewritten["authoring_state"]["dramatic_function"] = "a later arbitrary rewrite"
         errors = []
-        project_state_check.validate_contract(
-            rewritten,
-            "rewritten historical contract",
-            errors,
-            strict=True,
-            current_clip=historical_clip,
-            prompt=historical_prompt,
-            current_project_version=current_version,
-            historical_ledger=protected_historical_ledger(),
-        )
+        project_state_check.validate_contract(rewritten, "rewritten historical contract", errors, strict=True, current_clip=historical_clip, prompt=historical_prompt, current_project_version=current_version, historical_ledger=ledger)
         self.assertTrue(any("immutable provenance digest" in error for error in errors), errors)
 
-        rewritten["authoring_state_provenance"]["authoring_state_sha256"] = (
-            project_state_check.authoring_state_digest(rewritten["authoring_state"])
-        )
+        rewritten["authoring_state_provenance"]["authoring_state_sha256"] = project_state_check.authoring_state_digest(rewritten["authoring_state"])
         errors = []
-        project_state_check.validate_contract(
-            rewritten,
-            "rewritten historical contract and digest",
-            errors,
-            strict=True,
-            current_clip=historical_clip,
-            prompt=historical_prompt,
-            current_project_version=current_version,
-            historical_ledger=protected_historical_ledger(),
-        )
+        project_state_check.validate_contract(rewritten, "rewritten historical contract and digest", errors, strict=True, current_clip=historical_clip, prompt=historical_prompt, current_project_version=current_version, historical_ledger=ledger)
         self.assertTrue(any("not bound to an exact planned snapshot" in error for error in errors), errors)
 
-        current = load_json(
-            "examples/sequence-airport-arrival/clip-02-continuation-contract.json"
-        )
+        current = load_json("examples/sequence-airport-arrival/clip-02-continuation-contract.json")
         current_clip = next(item for item in project["clips"] if item["clip_id"] == "clip_02")
-        current_prompt = (
-            ROOT / "examples/sequence-airport-arrival/clip-02-prompt.md"
-        ).read_text(encoding="utf-8")
+        current_prompt = (ROOT / "examples/sequence-airport-arrival/clip-02-prompt.md").read_text(encoding="utf-8")
         current["authoring_state_provenance"]["state_revision"] = 1
         errors = []
-        project_state_check.validate_contract(
-            current,
-            "stale current provenance",
-            errors,
-            strict=True,
-            current_clip=current_clip,
-            prompt=current_prompt,
-            current_project_version=current_version,
-            historical_ledger=protected_historical_ledger(),
-        )
+        project_state_check.validate_contract(current, "stale current provenance", errors, strict=True, current_clip=current_clip, prompt=current_prompt, current_project_version=current_version, historical_ledger=ledger)
         self.assertTrue(any("does not match current project revision" in error for error in errors), errors)
 
     def test_contract_freshness_classifies_every_status_explicitly(self) -> None:
