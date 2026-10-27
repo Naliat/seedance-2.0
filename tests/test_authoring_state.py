@@ -374,11 +374,11 @@ class AuthoringStateAdversarialTests(unittest.TestCase):
     def test_strict_requires_record_for_either_explicit_lane(self) -> None:
         project = load_json("examples/sequence-airport-arrival/project-state.json")
         for lane in ("narrative", "non_narrative"):
-            probe = copy.deepcopy(project)
-            probe["clips"][0]["directors_read_lane"] = lane
-            probe["clips"][0].pop("authoring_state", None)
-            errors = self.validate_project_copy(probe, strict=True)
             with self.subTest(lane=lane):
+                probe = copy.deepcopy(project)
+                probe["clips"][0]["directors_read_lane"] = lane
+                probe["clips"][0].pop("authoring_state", None)
+                errors = self.validate_project_copy(probe, strict=True)
                 self.assertTrue(any("missing authoring_state" in error for error in errors), errors)
 
     def test_strict_sequence_requires_valid_explicit_lane(self) -> None:
