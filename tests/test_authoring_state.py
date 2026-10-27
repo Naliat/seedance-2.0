@@ -1051,64 +1051,35 @@ class AuthoringStateAdversarialTests(unittest.TestCase):
                 self.assertEqual(sum("missing exact prompt carrier" in error for error in errors), expected_missing, errors)
 
     def test_rendered_markdown_that_resembles_metadata_remains_evidence(self) -> None:
-        state = load_json(
-            "examples/sequence-airport-arrival/clip-01-contract.json"
-        )["authoring_state"]
-        visible = " ".join(state["prompt_carriers"][:-1])
-        carrier = state["prompt_carriers"][-1]
-        long_definition_label = "a" + (" " * 1000) + "b"
-        long_image_label = "x" + (" " * 1000)
+        state = load_json("examples/sequence-airport-arrival/clip-01-contract.json")["authoring_state"]
+        visible, carrier = " ".join(state["prompt_carriers"][:-1]), state["prompt_carriers"][-1]
+        long_definition_label, long_image_label = "a" + (" " * 1000) + "b", "x" + (" " * 1000)
         prompts = (
-            f'{visible}\n[ref]: URL\n"unclosed\n\n{carrier}',
-            f"{visible}\n![{carrier}]",
-            f"{visible}\n![{carrier}][missing]",
-            f"{visible}\n\\![{carrier}]",
-            f"{visible}\n[note]: not a valid destination {carrier}",
-            f"{visible}\n![{carrier}](not a valid destination)",
-            f'{visible}\n![{carrier}](image.png "open\n\nclose")',
-            f'{visible}\n![{carrier}](image.png\n\n"title")',
-            f"{visible}\n![{carrier}](image.png\v)",
-            f"{visible}\n![{carrier}](foo\\ bar)",
-            f"{visible}\n![{carrier}](foo\\\nbar)",
-            f'{visible}\n[ref]: image.png "open\n\n{carrier}"',
-            f"{visible}\n![{carrier}][ref]\n[ref]: image.png\v",
-            f"{visible}\n![{carrier}][ref]\n[ref]: foo\\ bar",
-            f"{visible}\n![{carrier}][fooa]\n[foo\\a]: image.png",
-            f"{visible}\n![{carrier}][foo[bar]\n[foo\\[bar]: image.png",
-            f"{visible}\n![{carrier}][a b]\n[{long_definition_label}]: image.png",
-            f"{visible}\n![{carrier}][{long_image_label}]\n[x]: image.png",
-            f"{visible}\n![{carrier}][foo\\!]\n[foo!]: image.png",
-            f"{visible}\n![{carrier}][foo!]\n[foo\\!]: image.png",
-            f"{visible}\n![{carrier}][foo&amp;]\n[foo&]: image.png",
-            f"{visible}\n![{carrier}][foo&]\n[foo&amp;]: image.png",
-            f"{visible}\n![{carrier}][ref]\n```\n[ref]: image.png\n```",
-            f"{visible}\n![{carrier}][ref]\n<script>\n[ref]: image.png\n</script>",
-            f"{visible}\n![{carrier}][ref]\n\t[ref]: image.png",
-            f"{visible}\n![{carrier}][ref]\n<div>\n[ref]: image.png\n</div>",
-            f"{visible}\n<div>{carrier}</div>",
-            f"{visible}\nThe shot continues without a cut.\n    {carrier}",
-            f"{visible}\n<div>\n`{carrier}`\n</div>",
-            f"{visible}\n![{carrier}][ref]\n<hr>\n[ref]: image.png",
-            f"{visible}\n![{carrier}][ref]\n\n<span>\n[ref]: image.png\n</span>",
-            f"{visible}\n![{carrier}][ref]\n[ref]: image.png",
-            f"{visible}\n![{carrier}][ref]\n<span>\n[ref]: image.png\n</span>",
-            f"{visible}\n![{carrier}][ref]\n<?target\n[ref]: image.png\n?>",
-            f"{visible}\n![{carrier}][ref]\n<!DOCTYPE\n[ref]: image.png\n>",
-            f"{visible}\n![{carrier}][ref]\n<![CDATA[\n[ref]: image.png\n]]>",
+            f'{visible}\n[ref]: URL\n"unclosed\n\n{carrier}', f"{visible}\n![{carrier}]", f"{visible}\n![{carrier}][missing]",
+            f"{visible}\n\\![{carrier}]", f"{visible}\n[note]: not a valid destination {carrier}",
+            f"{visible}\n![{carrier}](not a valid destination)", f'{visible}\n![{carrier}](image.png "open\n\nclose")',
+            f'{visible}\n![{carrier}](image.png\n\n"title")', f"{visible}\n![{carrier}](image.png\v)", f"{visible}\n![{carrier}](foo\\ bar)",
+            f"{visible}\n![{carrier}](foo\\\nbar)", f'{visible}\n[ref]: image.png "open\n\n{carrier}"',
+            f"{visible}\n![{carrier}][ref]\n[ref]: image.png\v", f"{visible}\n![{carrier}][ref]\n[ref]: foo\\ bar",
+            f"{visible}\n![{carrier}][fooa]\n[foo\\a]: image.png", f"{visible}\n![{carrier}][foo[bar]\n[foo\\[bar]: image.png",
+            f"{visible}\n![{carrier}][a b]\n[{long_definition_label}]: image.png", f"{visible}\n![{carrier}][{long_image_label}]\n[x]: image.png",
+            f"{visible}\n![{carrier}][foo\\!]\n[foo!]: image.png", f"{visible}\n![{carrier}][foo!]\n[foo\\!]: image.png",
+            f"{visible}\n![{carrier}][foo&amp;]\n[foo&]: image.png", f"{visible}\n![{carrier}][foo&]\n[foo&amp;]: image.png",
+            f"{visible}\n![{carrier}][ref]\n```\n[ref]: image.png\n```", f"{visible}\n![{carrier}][ref]\n<script>\n[ref]: image.png\n</script>",
+            f"{visible}\n![{carrier}][ref]\n\t[ref]: image.png", f"{visible}\n![{carrier}][ref]\n<div>\n[ref]: image.png\n</div>",
+            f"{visible}\n<div>{carrier}</div>", f"{visible}\nThe shot continues without a cut.\n    {carrier}",
+            f"{visible}\n<div>\n`{carrier}`\n</div>", f"{visible}\n![{carrier}][ref]\n<hr>\n[ref]: image.png",
+            f"{visible}\n![{carrier}][ref]\n\n<span>\n[ref]: image.png\n</span>", f"{visible}\n![{carrier}][ref]\n[ref]: image.png",
+            f"{visible}\n![{carrier}][ref]\n<span>\n[ref]: image.png\n</span>", f"{visible}\n![{carrier}][ref]\n<?target\n[ref]: image.png\n?>",
+            f"{visible}\n![{carrier}][ref]\n<!DOCTYPE\n[ref]: image.png\n>", f"{visible}\n![{carrier}][ref]\n<![CDATA[\n[ref]: image.png\n]]>",
             f"{visible}\n> The shot continues without a cut.\n>     {carrier}",
             f"{visible}\n<details><summary>{carrier}</summary>hidden body</details>",
-            f"{visible}\n<details open><summary>More</summary>{carrier}</details>",
-            f"{visible}\n<dialog open>{carrier}</dialog>",
+            f"{visible}\n<details open><summary>More</summary>{carrier}</details>", f"{visible}\n<dialog open>{carrier}</dialog>",
         )
         for prompt in prompts:
-            errors = project_state_check.compiled_prompt_errors(
-                prompt, state, "rendered markdown prompt", lane="narrative"
-            )
             with self.subTest(prompt=prompt):
-                self.assertFalse(
-                    any("missing exact prompt carrier" in error for error in errors),
-                    errors,
-                )
+                errors = project_state_check.compiled_prompt_errors(prompt, state, "rendered markdown prompt", lane="narrative")
+                self.assertFalse(any("missing exact prompt carrier" in error for error in errors), errors)
 
     def test_reference_definitions_do_not_cross_container_instances(self) -> None:
         cross_container = (
