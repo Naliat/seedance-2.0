@@ -451,11 +451,17 @@ class AuthoringStateAdversarialTests(unittest.TestCase):
         contract = load_json(
             "examples/sequence-airport-arrival/clip-02-continuation-contract.json"
         )
-        for record in (clip, contract):
-            record.pop("authoring_state", None)
-            record.pop("directors_read_lane", None)
-            record.pop("authoring_state_provenance", None)
-            record.pop("contract_authoring_state_snapshots", None)
+        list(
+            map(
+                lambda r: (
+                    r.pop("authoring_state", None),
+                    r.pop("directors_read_lane", None),
+                    r.pop("authoring_state_provenance", None),
+                    r.pop("contract_authoring_state_snapshots", None),
+                ),
+                (clip, contract),
+            )
+        )
         prompt = (ROOT / "examples/sequence-airport-arrival/clip-02-prompt.md").read_text(
             encoding="utf-8"
         )
