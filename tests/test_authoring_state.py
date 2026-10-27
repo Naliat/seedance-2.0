@@ -1606,17 +1606,10 @@ class AuthoringStateSchemaCompatibilityTests(unittest.TestCase):
         cls.contract_schema = load_json("schemas/clip-contract.schema.json")
 
     def test_schema_definitions_match_and_keep_legacy_absence(self) -> None:
-        for definition in (
-            "visible_one_line_text",
-            "authoring_state_provenance",
-            "authoring_state",
-            "narrative_authoring_state",
-            "non_narrative_authoring_state",
-        ):
-            self.assertEqual(
-                self.project_schema["$defs"][definition],
-                self.contract_schema["$defs"][definition],
-            )
+        definitions = ("visible_one_line_text", "authoring_state_provenance", "authoring_state", "narrative_authoring_state", "non_narrative_authoring_state")
+        for definition in definitions:
+            with self.subTest(definition=definition):
+                self.assertEqual(self.project_schema["$defs"][definition], self.contract_schema["$defs"][definition])
 
         project = load_json("examples/sequence-airport-arrival/project-state.json")
         for clip in project["clips"]:
@@ -1633,27 +1626,17 @@ class AuthoringStateSchemaCompatibilityTests(unittest.TestCase):
 
         partial_project = load_json("examples/sequence-airport-arrival/project-state.json")
         partial_project["clips"][0].pop("directors_read_lane")
-        self.assertTrue(
-            list(self.validator(self.project_schema).iter_errors(partial_project))
-        )
+        self.assertTrue(list(self.validator(self.project_schema).iter_errors(partial_project)))
 
-        partial_contract = load_json(
-            "examples/sequence-airport-arrival/clip-01-contract.json"
-        )
+        partial_contract = load_json("examples/sequence-airport-arrival/clip-01-contract.json")
         partial_contract.pop("directors_read_lane")
         partial_contract.pop("authoring_state_provenance")
-        self.assertTrue(
-            list(self.validator(self.contract_schema).iter_errors(partial_contract))
-        )
+        self.assertTrue(list(self.validator(self.contract_schema).iter_errors(partial_contract)))
 
-        provenance_only = load_json(
-            "examples/sequence-airport-arrival/clip-01-contract.json"
-        )
+        provenance_only = load_json("examples/sequence-airport-arrival/clip-01-contract.json")
         provenance_only.pop("directors_read_lane")
         provenance_only.pop("authoring_state")
-        self.assertTrue(
-            list(self.validator(self.contract_schema).iter_errors(provenance_only))
-        )
+        self.assertTrue(list(self.validator(self.contract_schema).iter_errors(provenance_only)))
 
     def test_schema_rejects_every_unicode_line_boundary_in_authoring_text(self) -> None:
         contract = load_json("examples/sequence-airport-arrival/clip-01-contract.json")
