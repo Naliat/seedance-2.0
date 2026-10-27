@@ -769,68 +769,37 @@ class AuthoringStateAdversarialTests(unittest.TestCase):
                 "authoring_state"
             ]
         )
-
-        for source in (
-            None,
-            "the source",
-            "probably supplied",
-            "ref:\u200b",
-            "file:\u2800",
-            "https://\u2060",
-        ):
-            state = copy.deepcopy(base)
-            state["non_transferable_detail_provenance"] = "source_bound"
-            state["non_transferable_detail_source"] = source
-            errors: list[str] = []
-            project_state_check.check_authoring_state(
-                state, "fixture", errors, required=True, lane="narrative"
-            )
+        for source in (None, "the source", "probably supplied", "ref:\u200b", "file:\u2800", "https://\u2060"):
             with self.subTest(source=source):
+                state = copy.deepcopy(base)
+                state.update({"non_transferable_detail_provenance": "source_bound", "non_transferable_detail_source": source})
+                errors: list[str] = []
+                project_state_check.check_authoring_state(state, "fixture", errors, required=True, lane="narrative")
                 self.assertTrue(any("requires an exact reference" in error for error in errors), errors)
 
         state = copy.deepcopy(base)
-        state["non_transferable_detail_provenance"] = "source_bound"
-        state["non_transferable_detail_source"] = "@Image1"
+        state.update({"non_transferable_detail_provenance": "source_bound", "non_transferable_detail_source": "@Image1"})
         errors = []
-        project_state_check.check_authoring_state(
-            state, "fixture", errors, required=True, lane="narrative"
-        )
+        project_state_check.check_authoring_state(state, "fixture", errors, required=True, lane="narrative")
         self.assertFalse(any("source_bound" in error for error in errors), errors)
 
         errors = []
-        project_state_check.check_authoring_state(
-            state,
-            "fixture",
-            errors,
-            required=True,
-            lane="narrative",
-            source_references={"@Image 1"},
-        )
+        project_state_check.check_authoring_state(state, "fixture", errors, required=True, lane="narrative", source_references={"@Image 1"})
         self.assertTrue(any("not present in reference_registry" in error for error in errors), errors)
 
         state["non_transferable_detail_source"] = "@Image 1"
         errors = []
-        project_state_check.check_authoring_state(
-            state,
-            "fixture",
-            errors,
-            required=True,
-            lane="narrative",
-            source_references={"@Image 1"},
-        )
+        project_state_check.check_authoring_state(state, "fixture", errors, required=True, lane="narrative", source_references={"@Image 1"})
         self.assertFalse(any("source_bound" in error for error in errors), errors)
 
         state["non_transferable_detail_provenance"] = "authored_choice"
         errors = []
-        project_state_check.check_authoring_state(
-            state, "fixture", errors, required=True, lane="narrative"
-        )
+        project_state_check.check_authoring_state(state, "fixture", errors, required=True, lane="narrative")
         self.assertTrue(any("source must be null" in error for error in errors), errors)
 
         project = load_json("examples/sequence-airport-arrival/project-state.json")
         project_state = project["clips"][0]["authoring_state"]
-        project_state["non_transferable_detail_provenance"] = "source_bound"
-        project_state["non_transferable_detail_source"] = "@Imaginary999"
+        project_state.update({"non_transferable_detail_provenance": "source_bound", "non_transferable_detail_source": "@Imaginary999"})
         errors = self.validate_project_copy(project, strict=True)
         self.assertTrue(any("not present in reference_registry" in error for error in errors), errors)
 
