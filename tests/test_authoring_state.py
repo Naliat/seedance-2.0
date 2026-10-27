@@ -1017,90 +1017,38 @@ class AuthoringStateAdversarialTests(unittest.TestCase):
         )
 
     def test_prompt_carriers_must_be_in_rendered_generation_prose(self) -> None:
-        state = load_json(
-            "examples/sequence-airport-arrival/clip-01-contract.json"
-        )["authoring_state"]
-        visible = " ".join(state["prompt_carriers"][:-1])
-        hidden = state["prompt_carriers"][-1]
+        state = load_json("examples/sequence-airport-arrival/clip-01-contract.json")["authoring_state"]
+        visible, hidden = " ".join(state["prompt_carriers"][:-1]), state["prompt_carriers"][-1]
         prompts = (
-            f"{visible}\n<!-- {hidden} -->",
-            f"{visible}\n\n[//]: # ({hidden})",
-            f"{visible}\n\n[{hidden}]: https://invalid.example/carrier",
-            f"---\nhidden_carrier: {hidden}\n---\n{visible}",
-            f"---\nhidden_carrier: {hidden}\n...\n{visible}",
-            f"---\rhidden_carrier: {hidden}\r---\r{visible}",
-            f"{visible}\n\n[carrier-note]: https://invalid.example\n \"{hidden}\"",
-            f'{visible}\n\n[carrier-note]: https://invalid.example\n "prefix {hidden} \\"suffix\\""',
-            f'{visible}\n\n[carrier-note]: https://invalid.example\n "prefix\n{hidden}"',
-            f'{visible}\n\n> [carrier-note]: https://invalid.example\n> "{hidden}"',
-            f'{visible}\n\n- [carrier-note]: https://invalid.example\n  "{hidden}"',
-            f"{visible}\n[source](https://invalid.example \"{hidden}\")",
-            f'{visible}\n[source](https://invalid.example "prefix {hidden} \\"suffix\\"")',
-            f'{visible}\n[source](https://invalid.example "prefix\n{hidden}")',
-            f'{visible}\n![decoration](image.png "open\n{hidden}")',
-            f"{visible}\n<span data-carrier=\"{hidden}\"></span>",
-            f"{visible}\n<span hidden>{hidden}</span>",
-            f"{visible}\n<span aria-hidden=\"true\">{hidden}</span>",
-            f"{visible}\n<span style=\"display: none\">{hidden}</span>",
-            f"{visible}\n<span style='visibility:hidden'>{hidden}</span>",
-            f"{visible}\n<span style=display:none>{hidden}</span>",
-            f'{visible}\n<span data-x=\">\" hidden>{hidden}</span>',
-            f"{visible}\n<div hidden><div>decoy</div>{hidden}</div>",
-            f'{visible}\n<div style="display:/*x*/none">{hidden}</div>',
-            f'{visible}\n<div style="visibility:/*x*/hidden">{hidden}</div>',
-            f'{visible}\n<div style="d\\69splay:none">{hidden}</div>',
-            f'{visible}\n<div style="display:\\6e one">{hidden}</div>',
-            f'{visible}\n<div style="content-visibility:hidden">{hidden}</div>',
-            f'{visible}\n<div style="opacity:0">{hidden}</div>',
-            f"{visible}\n<div hidden/>{hidden}",
-            f"{visible}\n<script>{hidden}</script>",
-            f"{visible}\n<script>{hidden}",
-            f"{visible}\n<script/>{hidden}",
-            f"{visible}\n<template>{hidden}</template>",
-            f"{visible}\n<template><template>decoy</template>{hidden}</template>",
-            f'{visible}\n<style>.secret{{display:none}}</style><div class="secret">{hidden}</div>',
-            f"{visible}\n<style>div{{display:none}}</style><div>{hidden}</div>",
-            f'{visible}\n<link rel="stylesheet" href="hidden.css"><div>{hidden}</div>',
-            f"{visible}\n<iframe src=\"about:blank\">{hidden}</iframe>",
-            f"{visible}\n<svg><metadata>{hidden}</metadata></svg>",
-            f"{visible}\n<svg><desc>{hidden}</desc></svg>",
-            f"{visible}\n<canvas>{hidden}</canvas>",
-            f"{visible}\n<details><summary>More</summary>{hidden}</details>",
-            f"{visible}\n<details><summary>First</summary><summary>{hidden}</summary></details>",
-            f"{visible}\n<dialog>{hidden}</dialog>",
-            f"{visible}\n\n[carrier-image]: image.png\n\n![{hidden}][carrier-image]",
-            f"{visible}\n\n[{hidden}]: image.png\n\n![{hidden}]",
-            f'{visible}\n\n[ref]: image.png "open\n{hidden}"',
-            f'{visible}\n\n[foo\\]bar]: image.png "{hidden}"\n![decoration][foo\\]bar]',
-            f'{visible}\n\n[ref]:\n image.png "{hidden}"',
-            f'{visible}\n\n[//]: #\n"{hidden}"',
-            f'{visible}\n\n[comment]: <>\n"{hidden}"',
-            f'{visible}\n\n[foo\n bar]: image.png "{hidden}"',
-            f'{visible}\n\n[foo\n bar]: image.png\n"{hidden}"',
-            f"{visible}\n```\n{hidden}\n```",
-            f"{visible}\n`{hidden}`",
-            f"{visible}\n\n    {hidden}",
-            f"{visible}\n>     {hidden}",
-            f"{visible}\n<pre><code>{hidden}</code></pre>",
-            f"{visible}\n<textarea>{hidden}</textarea>",
-            f"{visible}\n![{hidden}][ref]\n```bad`info\n\n[ref]: image.png",
-            f"{visible}\nThe shot continues.\n<span>\n`{hidden}`\n</span>",
+            f"{visible}\n<!-- {hidden} -->", f"{visible}\n\n[//]: # ({hidden})", f"{visible}\n\n[{hidden}]: https://invalid.example/carrier",
+            f"---\nhidden_carrier: {hidden}\n---\n{visible}", f"---\nhidden_carrier: {hidden}\n...\n{visible}", f"---\rhidden_carrier: {hidden}\r---\r{visible}",
+            f"{visible}\n\n[carrier-note]: https://invalid.example\n \"{hidden}\"", f'{visible}\n\n[carrier-note]: https://invalid.example\n "prefix {hidden} \\"suffix\\""',
+            f'{visible}\n\n[carrier-note]: https://invalid.example\n "prefix\n{hidden}"', f'{visible}\n\n> [carrier-note]: https://invalid.example\n> "{hidden}"',
+            f'{visible}\n\n- [carrier-note]: https://invalid.example\n  "{hidden}"', f"{visible}\n[source](https://invalid.example \"{hidden}\")",
+            f'{visible}\n[source](https://invalid.example "prefix {hidden} \\"suffix\\"")', f'{visible}\n[source](https://invalid.example "prefix\n{hidden}")',
+            f'{visible}\n![decoration](image.png "open\n{hidden}")', f"{visible}\n<span data-carrier=\"{hidden}\"></span>", f"{visible}\n<span hidden>{hidden}</span>",
+            f"{visible}\n<span aria-hidden=\"true\">{hidden}</span>", f"{visible}\n<span style=\"display: none\">{hidden}</span>", f"{visible}\n<span style='visibility:hidden'>{hidden}</span>",
+            f"{visible}\n<span style=display:none>{hidden}</span>", f'{visible}\n<span data-x=\">\" hidden>{hidden}</span>', f"{visible}\n<div hidden><div>decoy</div>{hidden}</div>",
+            f'{visible}\n<div style="display:/*x*/none">{hidden}</div>', f'{visible}\n<div style="visibility:/*x*/hidden">{hidden}</div>', f'{visible}\n<div style="d\\69splay:none">{hidden}</div>',
+            f'{visible}\n<div style="display:\\6e one">{hidden}</div>', f'{visible}\n<div style="content-visibility:hidden">{hidden}</div>', f'{visible}\n<div style="opacity:0">{hidden}</div>',
+            f"{visible}\n<div hidden/>{hidden}", f"{visible}\n<script>{hidden}</script>", f"{visible}\n<script>{hidden}", f"{visible}\n<script/>{hidden}",
+            f"{visible}\n<template>{hidden}</template>", f"{visible}\n<template><template>decoy</template>{hidden}</template>",
+            f'{visible}\n<style>.secret{{display:none}}</style><div class="secret">{hidden}</div>', f"{visible}\n<style>div{{display:none}}</style><div>{hidden}</div>",
+            f'{visible}\n<link rel="stylesheet" href="hidden.css"><div>{hidden}</div>', f"{visible}\n<iframe src=\"about:blank\">{hidden}</iframe>",
+            f"{visible}\n<svg><metadata>{hidden}</metadata></svg>", f"{visible}\n<svg><desc>{hidden}</desc></svg>", f"{visible}\n<canvas>{hidden}</canvas>",
+            f"{visible}\n<details><summary>More</summary>{hidden}</details>", f"{visible}\n<details><summary>First</summary><summary>{hidden}</summary></details>",
+            f"{visible}\n<dialog>{hidden}</dialog>", f"{visible}\n\n[carrier-image]: image.png\n\n![{hidden}][carrier-image]", f"{visible}\n\n[{hidden}]: image.png\n\n![{hidden}]",
+            f'{visible}\n\n[ref]: image.png "open\n{hidden}"', f'{visible}\n\n[foo\\]bar]: image.png "{hidden}"\n![decoration][foo\\]bar]', f'{visible}\n\n[ref]:\n image.png "{hidden}"',
+            f'{visible}\n\n[//]: #\n"{hidden}"', f'{visible}\n\n[comment]: <>\n"{hidden}"', f'{visible}\n\n[foo\n bar]: image.png "{hidden}"',
+            f'{visible}\n\n[foo\n bar]: image.png\n"{hidden}"', f"{visible}\n```\n{hidden}\n```", f"{visible}\n`{hidden}`", f"{visible}\n\n    {hidden}",
+            f"{visible}\n>     {hidden}", f"{visible}\n<pre><code>{hidden}</code></pre>", f"{visible}\n<textarea>{hidden}</textarea>",
+            f"{visible}\n![{hidden}][ref]\n```bad`info\n\n[ref]: image.png", f"{visible}\nThe shot continues.\n<span>\n`{hidden}`\n</span>",
         )
         for prompt in prompts:
-            errors = project_state_check.compiled_prompt_errors(
-                prompt, state, "comment-hidden prompt", lane="narrative"
-            )
-            expected_missing = (
-                len(state["prompt_carriers"])
-                if "<style" in prompt or 'rel="stylesheet"' in prompt
-                else 1
-            )
             with self.subTest(prompt=prompt):
-                self.assertEqual(
-                    sum("missing exact prompt carrier" in error for error in errors),
-                    expected_missing,
-                    errors,
-                )
+                errors = project_state_check.compiled_prompt_errors(prompt, state, "comment-hidden prompt", lane="narrative")
+                expected_missing = len(state["prompt_carriers"]) if "<style" in prompt or 'rel="stylesheet"' in prompt else 1
+                self.assertEqual(sum("missing exact prompt carrier" in error for error in errors), expected_missing, errors)
 
     def test_rendered_markdown_that_resembles_metadata_remains_evidence(self) -> None:
         state = load_json(
