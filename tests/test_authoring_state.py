@@ -405,11 +405,18 @@ class AuthoringStateAdversarialTests(unittest.TestCase):
             "examples/sequence-airport-arrival/clip-02-continuation-contract.json"
         )
         current_clip = copy.deepcopy(project["clips"][1])
-        for record in (contract, current_clip):
-            record["directors_read_lane"] = None
-            record.pop("authoring_state", None)
-            record.pop("authoring_state_provenance", None)
-            record.pop("contract_authoring_state_snapshots", None)
+        contract["directors_read_lane"] = None
+        current_clip["directors_read_lane"] = None
+        list(
+            map(
+                lambda r: (
+                    r.pop("authoring_state", None),
+                    r.pop("authoring_state_provenance", None),
+                    r.pop("contract_authoring_state_snapshots", None),
+                ),
+                (contract, current_clip),
+            )
+        )
         errors = []
         project_state_check.validate_contract(
             contract,
