@@ -122,11 +122,12 @@ def run_strict_corpus(records: list[dict]) -> subprocess.CompletedProcess[str]:
                 "prompt": prompt,
             }]
         )
-        output = result.stdout + result.stderr
-        self.assertNotEqual(result.returncode, 0, output)
-        self.assertIn("coherence", output)
+        output = (result.stdout + result.stderr).lower()
+        
+        assert result.returncode != 0
+        assert "coherence" in output
         for category in ("camera", "light", "sound", "action"):
-            self.assertIn(category, output.lower())
+            assert category in output
 
     def test_meaningless_repeated_padding_cannot_score_perfect(self) -> None:
         prompt = (
