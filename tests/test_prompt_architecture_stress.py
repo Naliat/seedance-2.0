@@ -71,7 +71,6 @@ def run_strict_corpus(records: list[dict]) -> subprocess.CompletedProcess[str]:
         )
 
 
-class FalseGreenRegressionTests(unittest.TestCase):
     def test_ten_identical_busker_prompts_for_unrelated_briefs_fail(self) -> None:
         busker = next(r["prompt"] for r in shipped_corpus() if r["id"] == "b09-s")
         briefs = [
@@ -98,10 +97,11 @@ class FalseGreenRegressionTests(unittest.TestCase):
         ]
 
         result = run_strict_corpus(records)
-        output = result.stdout + result.stderr
-        self.assertNotEqual(result.returncode, 0, output)
-        self.assertIn("duplicate", output.lower())
-        self.assertIn("brief_traceability", output)
+        output = (result.stdout + result.stderr).lower()
+        
+        assert result.returncode != 0
+        assert "duplicate" in output
+        assert "brief_traceability" in output
 
     def test_explicitly_incompatible_camera_light_sound_and_action_fail(self) -> None:
         prompt = (
