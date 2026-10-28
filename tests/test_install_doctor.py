@@ -130,14 +130,19 @@ class InstallDoctorTests(unittest.TestCase):
                         "sha256": hashlib.sha256((self.target/name).read_bytes()).hexdigest()}
                  for name in paths}
         record_path.write_text(json.dumps(installer._completion_marker_record(files)), encoding="utf-8")
+        
         original = doctor._read
-        def guard(root, relative, *args):
-            self.assertNotEqual(relative, old.name)
+        accessed_files = []
+        def track_reads(root, relative, *args):
+            accessed_files.append(relative)
             return original(root, relative, *args)
-        with patch.object(doctor, "_read", side_effect=guard):
+            
+        with patch.object(doctor, "_read", side_effect=track_reads):
             report = self.inspect()
-        self.assertEqual(report["recorded_paths_not_checked"], 1)
-        self.assertEqual(report["status"], "different_payload")
+            
+        assert old.name not in accessed_files
+        assert report["recorded_paths_not_checked"] == 1
+        assert report["status"] == "different_payload"
 
     def test_hard_linked_payload_is_unsafe(self):
         p = self.target / "references/example.md"
