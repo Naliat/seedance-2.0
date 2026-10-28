@@ -131,6 +131,6 @@ class ClientInstallGuidanceTests(unittest.TestCase):
             self.assertIn("skills.external_dirs", table_row(installed_readme, "Hermes Agent"))
             self.assertIn("Do not treat", installed_compatibility)
             self.assertIn("Client skill discovery paths", installed_registry)
-
+            
 if __name__ == "__main__":
     unittest.main()
