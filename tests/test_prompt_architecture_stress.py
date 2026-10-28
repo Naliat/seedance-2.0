@@ -226,20 +226,21 @@ class LexicalEvidenceTests(unittest.TestCase):
                 [sys.executable, str(SCRIPT), str(CORPUS_PATH), "--strict", "--out", str(output)],
                 cwd=ROOT, text=True, capture_output=True,
             )
-            self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
-            self.assertIn("lexical_v1 = slop_free in JSON", result.stdout)
-            self.assertIn("Do not remove style, dialogue or delivery requirements", result.stdout)
+            assert result.returncode == 0, result.stdout + result.stderr
+            assert "lexical_v1 = slop_free in JSON" in result.stdout
+            assert "Do not remove style, dialogue or delivery requirements" in result.stdout
+            
             exported = json.loads(output.read_text(encoding="utf-8"))
-            self.assertEqual(len(exported), len(shipped_corpus()))
+            assert len(exported) == len(shipped_corpus())
             for row in exported:
-                self.assertIn("slop_free", row["dims"])
-                self.assertEqual(row["gate_version"], "architecture-v3-advisory-length")
-                self.assertEqual(row["previous_gate"]["version"], "architecture-v2-nonlexical")
-                self.assertEqual(row["length_review"]["count"], row["words"])
-                self.assertFalse(row["length_review"]["operation_limit_assessed"])
-                self.assertFalse(row["lexical_review"]["context_assessed"])
-                self.assertFalse(row["lexical_review"]["rewrite_recommended"])
-                self.assertIn("context unassessed", row["dims"]["slop_free"]["note"])
+                assert "slop_free" in row["dims"]
+                assert row["gate_version"] == "architecture-v3-advisory-length"
+                assert row["previous_gate"]["version"] == "architecture-v2-nonlexical"
+                assert row["length_review"]["count"] == row["words"]
+                assert not row["length_review"]["operation_limit_assessed"]
+                assert not row["lexical_review"]["context_assessed"]
+                assert not row["lexical_review"]["rewrite_recommended"]
+                assert "context unassessed" in row["dims"]["slop_free"]["note"]
 
 
 class AdvisoryLexicalGateTests(unittest.TestCase):
