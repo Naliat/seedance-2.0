@@ -12,6 +12,12 @@ from scripts import install_doctor as doctor
 from scripts import install_codex_skill as installer
 
 
+def _safe_create_alias(creation_func, test_case_instance) -> None:
+    try:
+        creation_func()
+    except OSError as exc:
+        test_case_instance.skipTest(str(exc))
+
 class InstallDoctorTests(unittest.TestCase):
     def setUp(self):
         self.temp = tempfile.TemporaryDirectory()
@@ -135,19 +141,13 @@ class InstallDoctorTests(unittest.TestCase):
 
     def test_hard_linked_payload_is_unsafe(self):
         p = self.target / "references/example.md"
-        try:
-            os.link(p, self.target.parent / "alias")
-        except OSError as exc:
-            self.skipTest(str(exc))
+        _safe_create_alias(lambda: os.link(p, self.target.parent / "alias"), self)
         self.assertEqual(self.inspect()["status"], "unsafe")
 
     def test_symlink_payload_is_not_followed(self):
         p = self.target / "references/example.md"
         p.unlink()
-        try:
-            p.symlink_to(self.root / "references/example.md")
-        except OSError as exc:
-            self.skipTest(str(exc))
+        _safe_create_alias(lambda: p.symlink_to(self.root / "references/example.md"), self)
         self.assertEqual(self.inspect()["status"], "unsafe")
 
     def test_marker_change_mid_inspection_is_unsafe(self):
