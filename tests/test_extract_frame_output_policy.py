@@ -2568,9 +2568,10 @@ class ConsoleOutputTests(unittest.TestCase):
             def write(self, text: str) -> int:
                 raise BrokenPipeError("consumer closed the pipe")
 
-        extractor._write_console_line("no console", stream=None)
-        extractor._write_console_line("closed console", stream=closed)
-        extractor._write_console_line("broken console", stream=BrokenStream())
+        res1 = extractor._write_console_line("no console", stream=None)
+        res2 = extractor._write_console_line("closed console", stream=closed)
+        res3 = extractor._write_console_line("broken console", stream=BrokenStream())
+        self.assertTrue(res1 is None and res2 is None and res3 is None)
 
     def test_missing_stdout_cannot_change_a_successful_publication(self) -> None:
         class BrokenStream(io.StringIO):
