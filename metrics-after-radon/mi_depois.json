@@ -1,0 +1,354 @@
+{
+  "scripts/source_registry_check.py": {
+    "mi": 38.703958480958526,
+    "rank": "A"
+  },
+  "scripts/atlas_seedance_generate.py": {
+    "mi": 28.3272859995238,
+    "rank": "A"
+  },
+  "scripts/sequence_eval_check.py": {
+    "mi": 49.667977593208114,
+    "rank": "A"
+  },
+  "scripts/generation_run_check.py": {
+    "mi": 48.2070821422761,
+    "rank": "A"
+  },
+  "scripts/validate_skills.py": {
+    "mi": 2.4397145664078685,
+    "rank": "C"
+  },
+  "scripts/__init__.py": {
+    "mi": 87.20562045598551,
+    "rank": "A"
+  },
+  "scripts/behavior_contract_check.py": {
+    "mi": 7.987265718797318,
+    "rank": "C"
+  },
+  "scripts/lineage_contract.py": {
+    "mi": 0.0,
+    "rank": "C"
+  },
+  "scripts/validate_repo.py": {
+    "mi": 45.910394412012984,
+    "rank": "A"
+  },
+  "scripts/prompt_architecture_stress.py": {
+    "mi": 0.0,
+    "rank": "C"
+  },
+  "scripts/continuity_chain_check.py": {
+    "mi": 0.0,
+    "rank": "C"
+  },
+  "scripts/schema_check.py": {
+    "mi": 38.15654783461512,
+    "rank": "A"
+  },
+  "scripts/outcome_comparison.py": {
+    "mi": 53.20170280082848,
+    "rank": "A"
+  },
+  "scripts/moderation_prescreen.py": {
+    "mi": 50.334090047939476,
+    "rank": "A"
+  },
+  "scripts/language_coverage.py": {
+    "mi": 47.81317116256133,
+    "rank": "A"
+  },
+  "scripts/build_clip_posters.py": {
+    "mi": 55.29005027287756,
+    "rank": "A"
+  },
+  "scripts/pilot_plan.py": {
+    "mi": 67.70823567597456,
+    "rank": "A"
+  },
+  "scripts/install_codex_skill.py": {
+    "mi": 0.0,
+    "rank": "C"
+  },
+  "scripts/design_audit.py": {
+    "mi": 28.430664413883203,
+    "rank": "A"
+  },
+  "scripts/install_doctor.py": {
+    "mi": 37.25618237972665,
+    "rank": "A"
+  },
+  "scripts/content_audit.py": {
+    "mi": 53.457670981507775,
+    "rank": "A"
+  },
+  "scripts/prompt_lint.py": {
+    "mi": 0.0,
+    "rank": "C"
+  },
+  "scripts/eval_run.py": {
+    "mi": 0.0,
+    "rank": "C"
+  },
+  "scripts/strict_json.py": {
+    "mi": 4.487575447467501,
+    "rank": "C"
+  },
+  "scripts/build_hero.py": {
+    "mi": 58.20228918638889,
+    "rank": "A"
+  },
+  "scripts/vocab_schema_check.py": {
+    "mi": 0.0,
+    "rank": "C"
+  },
+  "scripts/project_state_check.py": {
+    "mi": 0.0,
+    "rank": "C"
+  },
+  "scripts/shot_table_check.py": {
+    "mi": 57.614924405382645,
+    "rank": "A"
+  },
+  "scripts/build_masthead_outlines.py": {
+    "mi": 0.0,
+    "rank": "C"
+  },
+  "scripts/eval_schema_check.py": {
+    "mi": 46.829968917691026,
+    "rank": "A"
+  },
+  "scripts/extract_last_frame.py": {
+    "mi": 0.0,
+    "rank": "C"
+  },
+  "scripts/eval_ledger_format.py": {
+    "mi": 60.98156425258669,
+    "rank": "A"
+  },
+  "tests/test_directors_read_contract.py": {
+    "mi": 29.815933054469543,
+    "rank": "A"
+  },
+  "tests/test_strict_cli_contract.py": {
+    "mi": 36.197305386466766,
+    "rank": "A"
+  },
+  "tests/test_eval_run.py": {
+    "mi": 15.767454628257518,
+    "rank": "B"
+  },
+  "tests/test_atlas_seedance_generate.py": {
+    "mi": 36.63983413733895,
+    "rank": "A"
+  },
+  "tests/test_design_audit.py": {
+    "mi": 44.241161056289776,
+    "rank": "A"
+  },
+  "tests/test_behavior_contract.py": {
+    "mi": 67.71863498617193,
+    "rank": "A"
+  },
+  "tests/test_runtime_payload.py": {
+    "mi": 27.144245622412168,
+    "rank": "A"
+  },
+  "tests/test_media_deadline.py": {
+    "mi": 40.92398797468989,
+    "rank": "A"
+  },
+  "tests/test_source_registry_freshness.py": {
+    "mi": 31.88283923894301,
+    "rank": "A"
+  },
+  "tests/test_sequence_eval.py": {
+    "mi": 67.71863498617193,
+    "rank": "A"
+  },
+  "tests/test_eval_run_discovery.py": {
+    "mi": 6.7609970805026345,
+    "rank": "C"
+  },
+  "tests/test_extract_frame_output_policy.py": {
+    "mi": 0.0,
+    "rank": "C"
+  },
+  "tests/test_generation_run_check.py": {
+    "mi": 67.71863498617193,
+    "rank": "A"
+  },
+  "tests/test_install_doctor.py": {
+    "mi": 32.37642348051726,
+    "rank": "A"
+  },
+  "tests/test_language_coverage.py": {
+    "mi": 65.03148184593945,
+    "rank": "A"
+  },
+  "tests/test_eval_run_integrity.py": {
+    "mi": 0.0,
+    "rank": "C"
+  },
+  "tests/test_lineage_consumer_parity.py": {
+    "mi": 27.319518045233867,
+    "rank": "A"
+  },
+  "tests/test_privileged_ci_workflow.py": {
+    "mi": 40.95777563404079,
+    "rank": "A"
+  },
+  "tests/test_release_docs_consistency.py": {
+    "mi": 54.723897029135436,
+    "rank": "A"
+  },
+  "tests/test_eval_judge_contracts.py": {
+    "mi": 20.85190129973552,
+    "rank": "A"
+  },
+  "tests/test_readme_reader_path.py": {
+    "mi": 64.20371878325767,
+    "rank": "A"
+  },
+  "tests/test_integrated_directors_read_routing.py": {
+    "mi": 50.33780530887555,
+    "rank": "A"
+  },
+  "tests/test_validation_contract.py": {
+    "mi": 35.732491199514406,
+    "rank": "A"
+  },
+  "tests/test_install_scopes.py": {
+    "mi": 45.110434341192835,
+    "rank": "A"
+  },
+  "tests/test_authoring_state.py": {
+    "mi": 0.0,
+    "rank": "C"
+  },
+  "tests/test_install_atomic.py": {
+    "mi": 0.0,
+    "rank": "C"
+  },
+  "tests/test_time_structure_contract.py": {
+    "mi": 65.91394375561522,
+    "rank": "A"
+  },
+  "tests/test_portable_routing.py": {
+    "mi": 15.629077468331348,
+    "rank": "B"
+  },
+  "tests/test_outcome_comparison.py": {
+    "mi": 44.471526452581934,
+    "rank": "A"
+  },
+  "tests/test_multilingual_native_review.py": {
+    "mi": 0.0,
+    "rank": "C"
+  },
+  "tests/test_eval_ledger_format.py": {
+    "mi": 55.177839612122256,
+    "rank": "A"
+  },
+  "tests/test_localized_readmes.py": {
+    "mi": 52.01082379778028,
+    "rank": "A"
+  },
+  "tests/test_client_install_guidance.py": {
+    "mi": 40.86294696813935,
+    "rank": "A"
+  },
+  "tests/test_schema_check.py": {
+    "mi": 11.218915578435809,
+    "rank": "B"
+  },
+  "tests/test_python_support_contract.py": {
+    "mi": 49.238990758550365,
+    "rank": "A"
+  },
+  "tests/test_install_long_paths.py": {
+    "mi": 19.01942426227363,
+    "rank": "A"
+  },
+  "tests/test_pilot_plan.py": {
+    "mi": 44.30822511309909,
+    "rank": "A"
+  },
+  "tests/test_continuity_chain.py": {
+    "mi": 0.0,
+    "rank": "C"
+  },
+  "tests/test_eval_execution_budget.py": {
+    "mi": 37.16514807356098,
+    "rank": "A"
+  },
+  "tests/test_moderation_prescreen.py": {
+    "mi": 59.47633394936328,
+    "rank": "A"
+  },
+  "tests/test_prompt_lint.py": {
+    "mi": 17.33926220096062,
+    "rank": "B"
+  },
+  "tests/test_install_payload.py": {
+    "mi": 0.0,
+    "rank": "C"
+  },
+  "tests/test_installer_output.py": {
+    "mi": 32.8798281792116,
+    "rank": "A"
+  },
+  "tests/test_teaching_art.py": {
+    "mi": 50.87106793608425,
+    "rank": "A"
+  },
+  "tests/test_shot_table_check.py": {
+    "mi": 53.79061381840774,
+    "rank": "A"
+  },
+  "tests/test_take_reconciliation.py": {
+    "mi": 15.329999064314142,
+    "rank": "B"
+  },
+  "tests/test_eval_transport.py": {
+    "mi": 50.356440549783976,
+    "rank": "A"
+  },
+  "tests/test_build_hero.py": {
+    "mi": 6.671895222157488,
+    "rank": "C"
+  },
+  "tests/test_extract_last_frame.py": {
+    "mi": 53.25816415930355,
+    "rank": "A"
+  },
+  "tests/test_front_page_clips.py": {
+    "mi": 58.335659406019865,
+    "rank": "A"
+  },
+  "tests/test_validate_skills_bytecode.py": {
+    "mi": 67.76301582314555,
+    "rank": "A"
+  },
+  "tests/test_teaching_example_cards.py": {
+    "mi": 58.20204704621275,
+    "rank": "A"
+  },
+  "tests/test_project_state.py": {
+    "mi": 22.880649193447177,
+    "rank": "A"
+  },
+  "tests/test_prompt_package_examples.py": {
+    "mi": 48.91248716483054,
+    "rank": "A"
+  },
+  "tests/test_strict_json_inputs.py": {
+    "mi": 2.2858647561282486,
+    "rank": "C"
+  },
+  "tests/test_prompt_architecture_stress.py": {
+    "mi": 0.0,
+    "rank": "C"
+  }
+}

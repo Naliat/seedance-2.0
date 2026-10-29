@@ -1,0 +1,794 @@
+{
+  "scripts/source_registry_check.py": {
+    "loc": 332,
+    "lloc": 188,
+    "sloc": 263,
+    "comments": 18,
+    "multi": 17,
+    "blank": 34,
+    "single_comments": 18
+  },
+  "scripts/atlas_seedance_generate.py": {
+    "loc": 232,
+    "lloc": 199,
+    "sloc": 198,
+    "comments": 7,
+    "multi": 0,
+    "blank": 25,
+    "single_comments": 9
+  },
+  "scripts/sequence_eval_check.py": {
+    "loc": 117,
+    "lloc": 49,
+    "sloc": 106,
+    "comments": 1,
+    "multi": 0,
+    "blank": 10,
+    "single_comments": 1
+  },
+  "scripts/generation_run_check.py": {
+    "loc": 80,
+    "lloc": 62,
+    "sloc": 68,
+    "comments": 1,
+    "multi": 0,
+    "blank": 11,
+    "single_comments": 1
+  },
+  "scripts/validate_skills.py": {
+    "loc": 942,
+    "lloc": 483,
+    "sloc": 805,
+    "comments": 16,
+    "multi": 27,
+    "blank": 90,
+    "single_comments": 20
+  },
+  "scripts/__init__.py": {
+    "loc": 39,
+    "lloc": 22,
+    "sloc": 21,
+    "comments": 4,
+    "multi": 7,
+    "blank": 7,
+    "single_comments": 4
+  },
+  "scripts/behavior_contract_check.py": {
+    "loc": 660,
+    "lloc": 313,
+    "sloc": 586,
+    "comments": 3,
+    "multi": 0,
+    "blank": 66,
+    "single_comments": 8
+  },
+  "scripts/lineage_contract.py": {
+    "loc": 1109,
+    "lloc": 620,
+    "sloc": 953,
+    "comments": 0,
+    "multi": 16,
+    "blank": 127,
+    "single_comments": 13
+  },
+  "scripts/validate_repo.py": {
+    "loc": 202,
+    "lloc": 120,
+    "sloc": 166,
+    "comments": 1,
+    "multi": 6,
+    "blank": 28,
+    "single_comments": 2
+  },
+  "scripts/prompt_architecture_stress.py": {
+    "loc": 5996,
+    "lloc": 2757,
+    "sloc": 5171,
+    "comments": 163,
+    "multi": 186,
+    "blank": 435,
+    "single_comments": 204
+  },
+  "scripts/continuity_chain_check.py": {
+    "loc": 2979,
+    "lloc": 1240,
+    "sloc": 2596,
+    "comments": 67,
+    "multi": 120,
+    "blank": 183,
+    "single_comments": 80
+  },
+  "scripts/schema_check.py": {
+    "loc": 490,
+    "lloc": 267,
+    "sloc": 400,
+    "comments": 15,
+    "multi": 21,
+    "blank": 54,
+    "single_comments": 15
+  },
+  "scripts/outcome_comparison.py": {
+    "loc": 81,
+    "lloc": 56,
+    "sloc": 65,
+    "comments": 0,
+    "multi": 8,
+    "blank": 7,
+    "single_comments": 1
+  },
+  "scripts/moderation_prescreen.py": {
+    "loc": 171,
+    "lloc": 123,
+    "sloc": 127,
+    "comments": 1,
+    "multi": 14,
+    "blank": 28,
+    "single_comments": 2
+  },
+  "scripts/language_coverage.py": {
+    "loc": 75,
+    "lloc": 61,
+    "sloc": 63,
+    "comments": 2,
+    "multi": 0,
+    "blank": 9,
+    "single_comments": 3
+  },
+  "scripts/build_clip_posters.py": {
+    "loc": 122,
+    "lloc": 79,
+    "sloc": 97,
+    "comments": 1,
+    "multi": 8,
+    "blank": 16,
+    "single_comments": 1
+  },
+  "scripts/pilot_plan.py": {
+    "loc": 61,
+    "lloc": 34,
+    "sloc": 44,
+    "comments": 2,
+    "multi": 4,
+    "blank": 9,
+    "single_comments": 4
+  },
+  "scripts/install_codex_skill.py": {
+    "loc": 6323,
+    "lloc": 3319,
+    "sloc": 5621,
+    "comments": 127,
+    "multi": 55,
+    "blank": 492,
+    "single_comments": 155
+  },
+  "scripts/design_audit.py": {
+    "loc": 277,
+    "lloc": 230,
+    "sloc": 228,
+    "comments": 12,
+    "multi": 5,
+    "blank": 30,
+    "single_comments": 14
+  },
+  "scripts/install_doctor.py": {
+    "loc": 174,
+    "lloc": 136,
+    "sloc": 149,
+    "comments": 4,
+    "multi": 0,
+    "blank": 18,
+    "single_comments": 7
+  },
+  "scripts/content_audit.py": {
+    "loc": 96,
+    "lloc": 49,
+    "sloc": 79,
+    "comments": 1,
+    "multi": 0,
+    "blank": 16,
+    "single_comments": 1
+  },
+  "scripts/prompt_lint.py": {
+    "loc": 1301,
+    "lloc": 825,
+    "sloc": 1101,
+    "comments": 10,
+    "multi": 25,
+    "blank": 142,
+    "single_comments": 33
+  },
+  "scripts/eval_run.py": {
+    "loc": 5563,
+    "lloc": 3051,
+    "sloc": 5021,
+    "comments": 57,
+    "multi": 33,
+    "blank": 408,
+    "single_comments": 101
+  },
+  "scripts/strict_json.py": {
+    "loc": 889,
+    "lloc": 570,
+    "sloc": 713,
+    "comments": 8,
+    "multi": 28,
+    "blank": 124,
+    "single_comments": 24
+  },
+  "scripts/build_hero.py": {
+    "loc": 291,
+    "lloc": 143,
+    "sloc": 184,
+    "comments": 36,
+    "multi": 19,
+    "blank": 49,
+    "single_comments": 39
+  },
+  "scripts/vocab_schema_check.py": {
+    "loc": 1750,
+    "lloc": 1002,
+    "sloc": 1601,
+    "comments": 20,
+    "multi": 0,
+    "blank": 129,
+    "single_comments": 20
+  },
+  "scripts/project_state_check.py": {
+    "loc": 2968,
+    "lloc": 1990,
+    "sloc": 2685,
+    "comments": 11,
+    "multi": 13,
+    "blank": 220,
+    "single_comments": 50
+  },
+  "scripts/shot_table_check.py": {
+    "loc": 107,
+    "lloc": 81,
+    "sloc": 79,
+    "comments": 1,
+    "multi": 6,
+    "blank": 19,
+    "single_comments": 3
+  },
+  "scripts/build_masthead_outlines.py": {
+    "loc": 1632,
+    "lloc": 929,
+    "sloc": 1347,
+    "comments": 35,
+    "multi": 24,
+    "blank": 181,
+    "single_comments": 80
+  },
+  "scripts/eval_schema_check.py": {
+    "loc": 209,
+    "lloc": 56,
+    "sloc": 194,
+    "comments": 1,
+    "multi": 0,
+    "blank": 14,
+    "single_comments": 1
+  },
+  "scripts/extract_last_frame.py": {
+    "loc": 3520,
+    "lloc": 1900,
+    "sloc": 3005,
+    "comments": 124,
+    "multi": 39,
+    "blank": 306,
+    "single_comments": 170
+  },
+  "scripts/eval_ledger_format.py": {
+    "loc": 125,
+    "lloc": 53,
+    "sloc": 93,
+    "comments": 3,
+    "multi": 4,
+    "blank": 23,
+    "single_comments": 5
+  },
+  "tests/test_directors_read_contract.py": {
+    "loc": 295,
+    "lloc": 158,
+    "sloc": 255,
+    "comments": 1,
+    "multi": 0,
+    "blank": 40,
+    "single_comments": 0
+  },
+  "tests/test_strict_cli_contract.py": {
+    "loc": 312,
+    "lloc": 151,
+    "sloc": 266,
+    "comments": 5,
+    "multi": 5,
+    "blank": 38,
+    "single_comments": 3
+  },
+  "tests/test_eval_run.py": {
+    "loc": 1261,
+    "lloc": 462,
+    "sloc": 1181,
+    "comments": 3,
+    "multi": 0,
+    "blank": 76,
+    "single_comments": 4
+  },
+  "tests/test_atlas_seedance_generate.py": {
+    "loc": 158,
+    "lloc": 124,
+    "sloc": 137,
+    "comments": 0,
+    "multi": 0,
+    "blank": 21,
+    "single_comments": 0
+  },
+  "tests/test_design_audit.py": {
+    "loc": 94,
+    "lloc": 71,
+    "sloc": 78,
+    "comments": 1,
+    "multi": 0,
+    "blank": 14,
+    "single_comments": 2
+  },
+  "tests/test_behavior_contract.py": {
+    "loc": 24,
+    "lloc": 12,
+    "sloc": 17,
+    "comments": 0,
+    "multi": 0,
+    "blank": 7,
+    "single_comments": 0
+  },
+  "tests/test_runtime_payload.py": {
+    "loc": 384,
+    "lloc": 208,
+    "sloc": 339,
+    "comments": 1,
+    "multi": 0,
+    "blank": 42,
+    "single_comments": 3
+  },
+  "tests/test_media_deadline.py": {
+    "loc": 151,
+    "lloc": 128,
+    "sloc": 132,
+    "comments": 2,
+    "multi": 0,
+    "blank": 16,
+    "single_comments": 3
+  },
+  "tests/test_source_registry_freshness.py": {
+    "loc": 472,
+    "lloc": 259,
+    "sloc": 385,
+    "comments": 6,
+    "multi": 12,
+    "blank": 67,
+    "single_comments": 8
+  },
+  "tests/test_sequence_eval.py": {
+    "loc": 24,
+    "lloc": 12,
+    "sloc": 17,
+    "comments": 0,
+    "multi": 0,
+    "blank": 7,
+    "single_comments": 0
+  },
+  "tests/test_eval_run_discovery.py": {
+    "loc": 1353,
+    "lloc": 624,
+    "sloc": 1260,
+    "comments": 4,
+    "multi": 0,
+    "blank": 92,
+    "single_comments": 1
+  },
+  "tests/test_extract_frame_output_policy.py": {
+    "loc": 3110,
+    "lloc": 1665,
+    "sloc": 2799,
+    "comments": 8,
+    "multi": 0,
+    "blank": 301,
+    "single_comments": 10
+  },
+  "tests/test_generation_run_check.py": {
+    "loc": 24,
+    "lloc": 12,
+    "sloc": 17,
+    "comments": 0,
+    "multi": 0,
+    "blank": 7,
+    "single_comments": 0
+  },
+  "tests/test_install_doctor.py": {
+    "loc": 191,
+    "lloc": 161,
+    "sloc": 164,
+    "comments": 1,
+    "multi": 0,
+    "blank": 25,
+    "single_comments": 2
+  },
+  "tests/test_language_coverage.py": {
+    "loc": 49,
+    "lloc": 37,
+    "sloc": 40,
+    "comments": 2,
+    "multi": 0,
+    "blank": 7,
+    "single_comments": 2
+  },
+  "tests/test_eval_run_integrity.py": {
+    "loc": 3499,
+    "lloc": 1614,
+    "sloc": 3184,
+    "comments": 6,
+    "multi": 0,
+    "blank": 312,
+    "single_comments": 3
+  },
+  "tests/test_lineage_consumer_parity.py": {
+    "loc": 423,
+    "lloc": 236,
+    "sloc": 376,
+    "comments": 5,
+    "multi": 0,
+    "blank": 47,
+    "single_comments": 0
+  },
+  "tests/test_privileged_ci_workflow.py": {
+    "loc": 162,
+    "lloc": 72,
+    "sloc": 145,
+    "comments": 0,
+    "multi": 0,
+    "blank": 17,
+    "single_comments": 0
+  },
+  "tests/test_release_docs_consistency.py": {
+    "loc": 165,
+    "lloc": 79,
+    "sloc": 133,
+    "comments": 0,
+    "multi": 5,
+    "blank": 27,
+    "single_comments": 0
+  },
+  "tests/test_eval_judge_contracts.py": {
+    "loc": 637,
+    "lloc": 284,
+    "sloc": 576,
+    "comments": 1,
+    "multi": 0,
+    "blank": 60,
+    "single_comments": 1
+  },
+  "tests/test_readme_reader_path.py": {
+    "loc": 22,
+    "lloc": 18,
+    "sloc": 18,
+    "comments": 0,
+    "multi": 0,
+    "blank": 4,
+    "single_comments": 0
+  },
+  "tests/test_integrated_directors_read_routing.py": {
+    "loc": 111,
+    "lloc": 83,
+    "sloc": 90,
+    "comments": 3,
+    "multi": 0,
+    "blank": 20,
+    "single_comments": 1
+  },
+  "tests/test_validation_contract.py": {
+    "loc": 213,
+    "lloc": 128,
+    "sloc": 184,
+    "comments": 1,
+    "multi": 0,
+    "blank": 28,
+    "single_comments": 1
+  },
+  "tests/test_install_scopes.py": {
+    "loc": 112,
+    "lloc": 86,
+    "sloc": 101,
+    "comments": 1,
+    "multi": 0,
+    "blank": 9,
+    "single_comments": 2
+  },
+  "tests/test_authoring_state.py": {
+    "loc": 1808,
+    "lloc": 960,
+    "sloc": 1651,
+    "comments": 2,
+    "multi": 0,
+    "blank": 157,
+    "single_comments": 0
+  },
+  "tests/test_install_atomic.py": {
+    "loc": 3157,
+    "lloc": 1785,
+    "sloc": 2817,
+    "comments": 11,
+    "multi": 0,
+    "blank": 330,
+    "single_comments": 10
+  },
+  "tests/test_time_structure_contract.py": {
+    "loc": 105,
+    "lloc": 60,
+    "sloc": 83,
+    "comments": 0,
+    "multi": 6,
+    "blank": 16,
+    "single_comments": 0
+  },
+  "tests/test_portable_routing.py": {
+    "loc": 634,
+    "lloc": 342,
+    "sloc": 560,
+    "comments": 2,
+    "multi": 0,
+    "blank": 73,
+    "single_comments": 1
+  },
+  "tests/test_outcome_comparison.py": {
+    "loc": 86,
+    "lloc": 76,
+    "sloc": 74,
+    "comments": 0,
+    "multi": 0,
+    "blank": 12,
+    "single_comments": 0
+  },
+  "tests/test_multilingual_native_review.py": {
+    "loc": 1619,
+    "lloc": 866,
+    "sloc": 1470,
+    "comments": 1,
+    "multi": 0,
+    "blank": 149,
+    "single_comments": 0
+  },
+  "tests/test_eval_ledger_format.py": {
+    "loc": 52,
+    "lloc": 42,
+    "sloc": 43,
+    "comments": 0,
+    "multi": 0,
+    "blank": 8,
+    "single_comments": 1
+  },
+  "tests/test_localized_readmes.py": {
+    "loc": 145,
+    "lloc": 94,
+    "sloc": 109,
+    "comments": 0,
+    "multi": 7,
+    "blank": 29,
+    "single_comments": 0
+  },
+  "tests/test_client_install_guidance.py": {
+    "loc": 136,
+    "lloc": 101,
+    "sloc": 109,
+    "comments": 1,
+    "multi": 0,
+    "blank": 26,
+    "single_comments": 1
+  },
+  "tests/test_schema_check.py": {
+    "loc": 997,
+    "lloc": 541,
+    "sloc": 886,
+    "comments": 10,
+    "multi": 7,
+    "blank": 92,
+    "single_comments": 12
+  },
+  "tests/test_python_support_contract.py": {
+    "loc": 82,
+    "lloc": 35,
+    "sloc": 69,
+    "comments": 0,
+    "multi": 0,
+    "blank": 12,
+    "single_comments": 1
+  },
+  "tests/test_install_long_paths.py": {
+    "loc": 612,
+    "lloc": 316,
+    "sloc": 547,
+    "comments": 1,
+    "multi": 0,
+    "blank": 63,
+    "single_comments": 2
+  },
+  "tests/test_pilot_plan.py": {
+    "loc": 51,
+    "lloc": 44,
+    "sloc": 44,
+    "comments": 0,
+    "multi": 0,
+    "blank": 7,
+    "single_comments": 0
+  },
+  "tests/test_continuity_chain.py": {
+    "loc": 4370,
+    "lloc": 1180,
+    "sloc": 4076,
+    "comments": 2,
+    "multi": 0,
+    "blank": 294,
+    "single_comments": 0
+  },
+  "tests/test_eval_execution_budget.py": {
+    "loc": 147,
+    "lloc": 101,
+    "sloc": 125,
+    "comments": 0,
+    "multi": 0,
+    "blank": 21,
+    "single_comments": 1
+  },
+  "tests/test_moderation_prescreen.py": {
+    "loc": 110,
+    "lloc": 77,
+    "sloc": 81,
+    "comments": 0,
+    "multi": 6,
+    "blank": 23,
+    "single_comments": 0
+  },
+  "tests/test_prompt_lint.py": {
+    "loc": 924,
+    "lloc": 326,
+    "sloc": 857,
+    "comments": 6,
+    "multi": 0,
+    "blank": 66,
+    "single_comments": 1
+  },
+  "tests/test_install_payload.py": {
+    "loc": 1929,
+    "lloc": 1210,
+    "sloc": 1713,
+    "comments": 16,
+    "multi": 11,
+    "blank": 191,
+    "single_comments": 14
+  },
+  "tests/test_installer_output.py": {
+    "loc": 264,
+    "lloc": 164,
+    "sloc": 214,
+    "comments": 1,
+    "multi": 0,
+    "blank": 48,
+    "single_comments": 2
+  },
+  "tests/test_teaching_art.py": {
+    "loc": 47,
+    "lloc": 41,
+    "sloc": 40,
+    "comments": 0,
+    "multi": 0,
+    "blank": 7,
+    "single_comments": 0
+  },
+  "tests/test_shot_table_check.py": {
+    "loc": 62,
+    "lloc": 39,
+    "sloc": 47,
+    "comments": 0,
+    "multi": 0,
+    "blank": 14,
+    "single_comments": 1
+  },
+  "tests/test_take_reconciliation.py": {
+    "loc": 721,
+    "lloc": 367,
+    "sloc": 650,
+    "comments": 4,
+    "multi": 0,
+    "blank": 71,
+    "single_comments": 0
+  },
+  "tests/test_eval_transport.py": {
+    "loc": 130,
+    "lloc": 90,
+    "sloc": 112,
+    "comments": 2,
+    "multi": 0,
+    "blank": 15,
+    "single_comments": 3
+  },
+  "tests/test_build_hero.py": {
+    "loc": 1380,
+    "lloc": 712,
+    "sloc": 1198,
+    "comments": 4,
+    "multi": 15,
+    "blank": 131,
+    "single_comments": 36
+  },
+  "tests/test_extract_last_frame.py": {
+    "loc": 197,
+    "lloc": 74,
+    "sloc": 164,
+    "comments": 3,
+    "multi": 6,
+    "blank": 25,
+    "single_comments": 2
+  },
+  "tests/test_front_page_clips.py": {
+    "loc": 89,
+    "lloc": 71,
+    "sloc": 69,
+    "comments": 0,
+    "multi": 5,
+    "blank": 15,
+    "single_comments": 0
+  },
+  "tests/test_validate_skills_bytecode.py": {
+    "loc": 77,
+    "lloc": 50,
+    "sloc": 53,
+    "comments": 1,
+    "multi": 6,
+    "blank": 16,
+    "single_comments": 2
+  },
+  "tests/test_teaching_example_cards.py": {
+    "loc": 89,
+    "lloc": 67,
+    "sloc": 70,
+    "comments": 2,
+    "multi": 3,
+    "blank": 14,
+    "single_comments": 2
+  },
+  "tests/test_project_state.py": {
+    "loc": 521,
+    "lloc": 264,
+    "sloc": 469,
+    "comments": 3,
+    "multi": 0,
+    "blank": 49,
+    "single_comments": 3
+  },
+  "tests/test_prompt_package_examples.py": {
+    "loc": 82,
+    "lloc": 48,
+    "sloc": 64,
+    "comments": 0,
+    "multi": 0,
+    "blank": 17,
+    "single_comments": 1
+  },
+  "tests/test_strict_json_inputs.py": {
+    "loc": 1204,
+    "lloc": 553,
+    "sloc": 1117,
+    "comments": 4,
+    "multi": 0,
+    "blank": 86,
+    "single_comments": 1
+  },
+  "tests/test_prompt_architecture_stress.py": {
+    "loc": 4089,
+    "lloc": 1419,
+    "sloc": 3789,
+    "comments": 6,
+    "multi": 7,
+    "blank": 288,
+    "single_comments": 5
+  }
+}
