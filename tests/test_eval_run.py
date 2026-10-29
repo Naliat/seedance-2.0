@@ -1171,13 +1171,12 @@ class EvalRunProviderTests(EvalRunTestSupport, unittest.TestCase):
         self.assertIs(json.loads(request.data)["stream"], False)
 
     def test_orcarouter_accepts_gateway_model_echo(self) -> None:
-        cases = tuple(eval_run.ORCAROUTER_MODEL_ECHOES.items())
-        for requested, echoes in cases:
+        for requested, echoes in eval_run.ORCAROUTER_MODEL_ECHOES.items():
             config, endpoint, model = eval_run.resolve_provider(
                 "orcarouter", "global_en", requested
             )
             for echo in echoes:
-                with self.subTest(model=requested, echo=echo):
+                with self.subTest(requested=requested, echo=echo):
                     payload = completion_payload("orcarouter", model)
                     payload["model"] = echo
                     with mock.patch.object(
