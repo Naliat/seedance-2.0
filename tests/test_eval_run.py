@@ -1132,7 +1132,7 @@ class EvalRunProviderTests(EvalRunTestSupport, unittest.TestCase):
         self.assertNotIn("orcarouter/auto", eval_run.ORCAROUTER_MODELS)
 
     def test_orcarouter_defaults_and_validation(self) -> None:
-        config, endpoint, model = eval_run.resolve_provider(
+        _, endpoint, model = eval_run.resolve_provider(
             "orcarouter", "global_en", None
         )
 
