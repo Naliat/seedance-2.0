@@ -1157,17 +1157,17 @@ class EvalRunProviderTests(EvalRunTestSupport, unittest.TestCase):
             "_open_provider_request",
             return_value=FakeResponse(payload),
         ) as urlopen:
-            text = eval_run.call_api(
+            response = eval_run.call_api(
                 "system", "user", model, "test-key", config, endpoint
             )
 
         request = urlopen.call_args.args[0]
-        self.assertEqual(text, "ok")
+        self.assertEqual(response, "ok")
         self.assertEqual(request.full_url, "https://api.orcarouter.ai/v1/messages")
         self.assertEqual(request.get_header("X-api-key"), "test-key")
         self.assertIsNone(request.get_header("Authorization"))
         self.assertEqual(request.get_header("Anthropic-version"), "2023-06-01")
-        self.assertEqual(json.loads(request.data)["model"], "anthropic/claude-sonnet-4.6")
+        self.assertEqual(json.loads(request.data)["model"], model)
         self.assertIs(json.loads(request.data)["stream"], False)
 
     def test_orcarouter_accepts_gateway_model_echo(self) -> None:
