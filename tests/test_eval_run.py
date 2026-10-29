@@ -1129,8 +1129,6 @@ class EvalRunProviderTests(EvalRunTestSupport, unittest.TestCase):
         self.assertEqual(config.auth_header, "x-api-key")
         self.assertEqual(config.auth_prefix, "")
         self.assertEqual(config.response_schema, "orcarouter")
-        # The adaptive router is intentionally not the default: the eval judge
-        # depends on a stable response model, so the default is a pinned model.
         self.assertNotIn("orcarouter/auto", eval_run.ORCAROUTER_MODELS)
 
     def test_orcarouter_defaults_and_validation(self) -> None:
