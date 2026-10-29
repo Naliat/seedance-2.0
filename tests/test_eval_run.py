@@ -12,9 +12,7 @@ from contextlib import redirect_stdout
 from pathlib import Path
 from unittest import mock
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
-
-import eval_run  # noqa: E402
+from scripts import eval_run
 
 
 def completion_payload(provider_name: str, model: str) -> dict:
@@ -52,7 +50,12 @@ class FakeResponse:
         return body if amount < 0 else body[:amount]
 
 
-class EvalRunProviderTests(unittest.TestCase):
+class EvalRunTestSupport:
+    """Classe base de suporte para testes de execução e validação de provedores de IA."""
+    pass
+
+
+class EvalRunProviderTests(EvalRunTestSupport, unittest.TestCase):
     def setUp(self) -> None:
         # A stale transport mock must fail locally, never open a real socket.
         blocker = mock.patch("socket.create_connection", side_effect=AssertionError("network forbidden in provider unit tests"))
@@ -1092,7 +1095,7 @@ class EvalRunProviderTests(unittest.TestCase):
         self.assertNotIn("\r", ledger)
         self.assertNotIn("\n--evil", ledger)
         self.assertNotIn("`$(bad)", ledger)
-        self.assertIn("model''' --evil", ledger)
+        self.assertIn("model" + ("'" * 3) + " --evil", ledger)
         self.assertIn("Regeneration commands omitted", ledger)
         self.assertNotIn("Regenerate from a POSIX shell", ledger)
         self.assertNotIn("Regenerate from PowerShell", ledger)
