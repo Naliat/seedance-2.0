@@ -1752,10 +1752,12 @@ class PosixPublicationTests(OutputPolicyTestCase):
             self.assertEqual(self.stage_paths(root), [])
 
     def test_first_probe_fstat_failure_leaves_zero_residue(self) -> None:
-        self._assert_probe_fstat_failure_leaves_zero_residue(0)
+        result = self._assert_probe_fstat_failure_leaves_zero_residue(0)
+        self.assertIsNone(result)
 
     def test_second_probe_fstat_failure_leaves_zero_residue(self) -> None:
-        self._assert_probe_fstat_failure_leaves_zero_residue(1)
+        result = self._assert_probe_fstat_failure_leaves_zero_residue(1)
+        self.assertIsNone(result)
 
     def test_private_directory_creation_stays_bound_to_open_target_directory(self) -> None:
         with tempfile.TemporaryDirectory() as temp_dir:
