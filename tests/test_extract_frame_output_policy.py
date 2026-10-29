@@ -3023,7 +3023,8 @@ class PngStreamTests(unittest.TestCase):
 
     @unittest.skipUnless(FFMPEG, "decode-probe regression requires ffmpeg")
     def test_stream_fixtures_are_genuinely_decodable_pngs(self) -> None:
-        extractor._probe_decodable_png(str(FFMPEG), self.minimal_png(b"valid"))
+        result = extractor._probe_decodable_png(str(FFMPEG), self.minimal_png(b"valid"))
+        self.assertIsNone(result)
 
 
 @unittest.skipUnless(FFMPEG, "protected pipeline integration requires ffmpeg")
