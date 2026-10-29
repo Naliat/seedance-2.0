@@ -1233,7 +1233,20 @@ class EvalRunProviderTests(EvalRunTestSupport, unittest.TestCase):
         output = io.StringIO()
         with (
             mock.patch.object(
-                sys, "argv", ["eval_run.py", "--provider", "orcarouter", "--live", "--limit", "1", "--max-calls", "3", "--max-output-tokens", "3300"]
+                sys,
+                "argv",
+                [
+                    "eval_run.py",
+                    "--provider",
+                    "orcarouter",
+                    "--live",
+                    "--limit",
+                    "1",
+                    "--max-calls",
+                    "3",
+                    "--max-output-tokens",
+                    "3300",
+                ],
             ),
             mock.patch.dict(os.environ, {}, clear=True),
             redirect_stdout(output),
